@@ -1,0 +1,12 @@
+/target
+/.morph-providers
+
+# misc
+/foo/
+
+# The policy pack example, once npm install has run in it
+examples/gcp-policy/node_modules/
+examples/gcp-policy/package-lock.json
+
+# IDE
+/.idea/

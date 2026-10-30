@@ -1,0 +1,75 @@
+[workspace]
+resolver = "3"
+members = ["crates/morph-controller-core"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[workspace.dependencies]
+morph-controller-core = { path = "crates/morph-controller-core" }
+
+morph = { path = "../morph/crates/morph" }
+morph-bridge = { path = "../morph/crates/morph-bridge" }
+morph-mock = { path = "../morph/crates/morph-mock" }
+morph-postgres = { path = "../morph/crates/morph-postgres" }
+
+async-trait = "0.1"
+humantime-serde = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
+toml = "0.9"
+tracing = "0.1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+# The PostgreSQL controller: the source-neutral core, with PostgreSQL as
+# the source of rows and changes, and the program that runs it.
+[package]
+name = "morph-postgres-controller"
+description = "Reconciles external resources through Morph or Pulumi whenever PostgreSQL says that their desired state changed"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+morph-controller-core.workspace = true
+
+morph.workspace = true
+morph-mock.workspace = true
+morph-postgres.workspace = true
+
+async-trait.workspace = true
+bytes = "1"
+clap = { version = "4", features = ["derive"] }
+humantime-serde.workspace = true
+pgwire-replication = { version = "0.4", default-features = false, features = ["tls-rustls", "scram", "md5"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
+rustls-pki-types = { version = "1", features = ["std"] }
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tokio-postgres = { version = "0.7", features = ["with-serde_json-1"] }
+tokio-postgres-rustls = { version = "0.14", features = ["ring"] }
+tokio-util.workspace = true
+toml.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+webpki-roots = "1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full", "test-util"] }
+
+[lints]
+workspace = true

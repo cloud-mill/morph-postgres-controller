@@ -1,0 +1,32 @@
+# The source-neutral core of a controller: everything that does not depend on
+# where the rows and their changes come from. A front-end such as
+# morph-postgres-controller adds a source and the program.
+[package]
+name = "morph-controller-core"
+description = "Reconciles external resources through Morph or Pulumi whenever a source of rows says that their desired state changed"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+morph.workspace = true
+morph-bridge.workspace = true
+morph-mock.workspace = true
+
+async-trait.workspace = true
+humantime-serde.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true
+toml.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full", "test-util"] }
+tracing-subscriber = "0.3"
+
+[lints]
+workspace = true
